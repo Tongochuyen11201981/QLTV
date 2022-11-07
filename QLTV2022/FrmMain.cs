@@ -86,5 +86,12 @@ namespace QLTV2022
         {
 
         }
+
+        private void thểLoạiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            Form f = new Frm_Theloai();
+            f.Show();
+        }
     }
 }

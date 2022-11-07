@@ -91,7 +91,7 @@ namespace QLTV2022
         }
         private void btnThem_Click(object sender, EventArgs e)
         {
-            sql = "Select MADG, HOTENDG, GIOITINH, NGAYSINH, SODIENTHOAIDG From tblDMHH";
+            sql = "Select MADG, HOTENDG, GIOITINH, NGAYSINH, SODIENTHOAIDG From DOCGIA";
             da = new SqlDataAdapter(sql, conn);
             dt.Clear();
             da.Fill(dt);
@@ -107,19 +107,7 @@ namespace QLTV2022
             btnLuu.Enabled = true;
 
         }
-        private void btnXoa_Click(object sender, EventArgs e)
-        {
-            if (MessageBox.Show("Bạn có chắc chắn muốn xóa bản ghi hiện thời?Y/N", "Xác nhận " +
-                "yêu cầu", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
-            {
-                sql = "Delete from tblDMHH where MaHH='" + txtMaDG.Text + "'";
-                cmd.Connection = conn;
-                cmd.CommandText = sql;
-                cmd.ExecuteNonQuery();
-                grDMDG.Rows.RemoveAt(grDMDG.CurrentRow.Index);
-                NapCT();
-            }
-        }
+        
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
@@ -134,9 +122,8 @@ namespace QLTV2022
                     comGioitinh.Text = grDMDG.Rows[i].Cells["GIOITINH"].Value.ToString();
                     dateTimePicker1.Text = grDMDG.Rows[i].Cells["NGAYSINH"].Value.ToString();
                     txtSDT.Text = grDMDG.Rows[i].Cells["SODIENTHOAIDG"].Value.ToString();
-                    sql = "update DOCGIA set SODIENTHOAIDG=" + txtSDT.Text + "," +
-                        " HOTENDG=N'" + txtHoten.Text + "'GIOITINH=N'" + comGioitinh.Text + "'," +
-                        "NGAYSINH=N'" + dateTimePicker1.Text + "'Where MADG='" + txtMaDG.Text + "'";
+                    sql = "Update DOCGIA set SODIENTHOAIDG = '" + txtSDT.Text + "', HOTENDG = N'" + txtHoten.Text + "', GIOITINH = N'" + comGioitinh.Text + "', " +
+                        "NGAYSINH = N'" + dateTimePicker1.Text + "' Where MADG = '" + txtMaDG.Text + "'";
                     cmd.Connection = conn;
                     cmd.CommandText = sql;
                     cmd.ExecuteNonQuery();
@@ -150,8 +137,7 @@ namespace QLTV2022
                 // chỗ này là cập nhật thêm mới
                 addnewflag = false;
                 sql = "Insert into DOCGIA (MADG, HOTENDG, GIOITINH, NGAYSINH, SODIENTHOAIDG)" +
-                    " Values ('" + txtMaDG.Text + "', '" + txtHoten.Text + "',N'" +
-                    comGioitinh.Text + "',N'" + dateTimePicker1.Text + "'," + txtSDT.Text + ",N'" + "')";
+                    " Values ('" + txtMaDG.Text + "', '" + txtHoten.Text + "', N'" + comGioitinh.Text + "', N'" + dateTimePicker1.Text + "', N'" + txtSDT.Text + "')";
                 cmd.Connection = conn;
                 cmd.CommandText = sql;
                 cmd.ExecuteNonQuery();
@@ -180,6 +166,20 @@ namespace QLTV2022
         private void grDMDG_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void btnXoa_Click_1(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Bạn có chắc chắn muốn xóa bản ghi hiện thời?Y/N", "Xác nhận " +
+                "yêu cầu", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2) == DialogResult.Yes)
+            {
+                sql = "Delete from DOCGIA where MaDG='" + txtMaDG.Text + "'";
+                cmd.Connection = conn;
+                cmd.CommandText = sql;
+                cmd.ExecuteNonQuery();
+                grDMDG.Rows.RemoveAt(grDMDG.CurrentRow.Index);
+                NapCT();
+            }
         }
 
         private void label2_Click(object sender, EventArgs e)
