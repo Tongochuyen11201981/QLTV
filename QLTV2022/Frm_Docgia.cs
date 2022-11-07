@@ -27,7 +27,7 @@ namespace QLTV2022
 
         private void Frm_Docgia_Load(object sender, EventArgs e)
         {
-            constr = @"Data Source=LENOVO;Initial Catalog=QLTV;Integrated Security=True";
+            constr = @"Data Source=LAPTOP-KMAQIM21\SQLEXPRESS;Initial Catalog=QLTV;Integrated Security=True";
             conn.ConnectionString = constr;
             conn.Open();
             sql = " Select MADG, HOTENDG, GIOITINH, NGAYSINH, SODIENTHOAIDG From DOCGIA";
